@@ -26,14 +26,14 @@ services:
       # MAYAN_APT_INSTALLS: "tesseract-ocr-deu tesseract-ocr-nld"
       # To add Python libraries, like LDAP, put then in the variable below.
       # MAYAN_PIP_INSTALLS: "python-ldap"
-    image: mayanedms/mayanedms:3
+    image: mayanedms/mayanedms:3.4.17
     networks:
       - bridge
     ports:
       - "80:8000"
     restart: unless-stopped
     volumes:
-      - ${MAYAN_APP_VOLUME:-app}:/var/lib/mayan
+      - /Users/jerrywang/docker-volumes/mayan-edms/media:/var/lib/mayan
       # Optional volumes to access external data like staging or watch folders
       # - /opt/staging_files:/staging_files
       # - /opt/watch_folder:/watch_folder
@@ -48,7 +48,7 @@ services:
       - bridge
     restart: unless-stopped
     volumes:
-      - ${MAYAN_POSTGRES_VOLUME:-postgres}:/var/lib/postgresql/data
+      - /Users/jerrywang/docker-volumes/mayan-edms/postgres:/var/lib/postgresql/data
 
   redis:
     command:
@@ -74,7 +74,7 @@ services:
       - bridge
     restart: unless-stopped
     volumes:
-      - ${MAYAN_REDIS_VOLUME:-redis}:/data
+      - /Users/jerrywang/docker-volumes/mayan-edms/redis:/data
 
   # Optional services
 
